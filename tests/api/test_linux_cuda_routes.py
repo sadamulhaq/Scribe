@@ -4,8 +4,8 @@ from typing import Any
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.domain.errors import CapabilityUnavailableError
-from local_meeting_ai.infrastructure import linux_cuda
+from scribe.domain.errors import CapabilityUnavailableError
+from scribe.infrastructure import linux_cuda
 
 
 def test_linux_cuda_repair_api_reports_success_and_failure(

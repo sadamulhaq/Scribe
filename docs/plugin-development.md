@@ -1,6 +1,6 @@
 # Plugin and provider development
 
-This document is the implementation contract for extending Meet2Notes without
+This document is the implementation contract for extending Scribe without
 editing application core modules. It complements the shorter [Plugin API
 reference](plugins.md) with provider, model, settings, packaging, and testing
 guidance.
@@ -26,14 +26,14 @@ monkey-patching core modules.
 ## Package and discovery
 
 A plugin should live in its author's own repository as an ordinary Python
-package. Forking Meet2Notes is useful for integration testing, but plugin code
+package. Forking Scribe is useful for integration testing, but plugin code
 does not need a pull request into the core when the public API is sufficient.
-Once installed into the private Meet2Notes environment, its `pyproject.toml`
+Once installed into the private Scribe environment, its `pyproject.toml`
 declares one entry point:
 
 ```toml
-[project.entry-points."meet2notes.plugins"]
-vibevoice = "meet2notes_vibevoice.plugin:create_plugin"
+[project.entry-points."scribe.plugins"]
+vibevoice = "scribe_vibevoice.plugin:create_plugin"
 ```
 
 The loaded object exposes a `PluginManifest` and a synchronous `register`
@@ -43,11 +43,11 @@ are called only when capabilities or execution require that provider.
 
 ## Provider registration
 
-All public SDK imports come from `local_meeting_ai.plugins`. A transcription
+All public SDK imports come from `scribe.plugins`. A transcription
 provider can be declared as follows:
 
 ```python
-from local_meeting_ai.plugins import (
+from scribe.plugins import (
     PluginManifest,
     PluginRegistrar,
     PluginSettingField,
@@ -125,7 +125,7 @@ release; add a migration profile or retain an alias in the plugin instead.
 ## Engine contracts
 
 Providers implement the protocol for their declared kind. These public types are
-re-exported by `local_meeting_ai.plugins`:
+re-exported by `scribe.plugins`:
 
 - `TranscriptionEngine`
 - `DiarizationEngine`
@@ -166,7 +166,7 @@ unless `allow_model_download=True`.
 ### Composite transcription and diarization
 
 An ASR engine that already identifies speakers returns both `segments` and
-`speaker_turns` in `TranscriptionResult`. Meet2Notes assigns those turns to the
+`speaker_turns` in `TranscriptionResult`. Scribe assigns those turns to the
 saved transcript and skips the separate diarization stage. Speaker numbers must
 be zero-based, stable within the result, and accompanied by millisecond start/end
 times.
@@ -256,7 +256,7 @@ At minimum, a provider package should test:
 7. Timestamp normalization and empty/malformed model output.
 8. Composite speaker turns, if advertised.
 9. Settings validation and absence of secrets from logs.
-10. Installation into a clean Meet2Notes `.venv` followed by rescan,
+10. Installation into a clean Scribe `.venv` followed by rescan,
     enablement, selection, and removal.
 
 Run the host checks before publishing:
@@ -289,13 +289,13 @@ passing compatibility tests, its author may open the repository's **Community
 plugin listing** issue. Include:
 
 1. Repository and package/release URL.
-2. Current version plus Meet2Notes and Plugin API compatibility.
+2. Current version plus Scribe and Plugin API compatibility.
 3. Registered hooks, providers, models, and settings.
 4. Permissions, network behavior, model downloads, and execution location.
 5. Tested operating systems and CPU/GPU configurations.
 
 Maintainers may add the project to `community-plugins.json`, decline it, or
-remove it later. Listing does not move the code into the Meet2Notes repository:
+remove it later. Listing does not move the code into the Scribe repository:
 the author owns releases, support, security fixes, and compatibility. A core PR
 is appropriate only when the plugin exposes a generic missing capability in the
 public API; discuss that capability in a core issue first.
@@ -311,7 +311,7 @@ Catalog entries use this intentionally small shape:
   "install": "meet2notes-vibevoice",
   "version": "1.0.0",
   "plugin_api": "1",
-  "requires_meet2notes": ">=0.5,<1",
+  "requires_scribe": ">=0.5,<1",
   "permissions": ["read_recording", "write_model_cache"]
 }
 ```
@@ -322,7 +322,7 @@ security claims; those remain in the linked repository and listing issue.
 
 ## Compatibility policy
 
-Plugins must import only from `local_meeting_ai.plugins`. Imports from
+Plugins must import only from `scribe.plugins`. Imports from
 `application`, `infrastructure`, `web`, `bootstrap`, or concrete built-in
 adapters are private and may change without compatibility guarantees. Additive
 contracts remain within Plugin API v1; a future breaking contract increments

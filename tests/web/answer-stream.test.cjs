@@ -3,11 +3,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const source = fs.readFileSync(path.join(__dirname, '../../src/local_meeting_ai/web/static/js/answer-stream.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../../src/scribe/web/static/js/answer-stream.js'), 'utf8');
 function load(fetch, api = () => { throw new Error('Unexpected retry'); }) {
-  const context = vm.createContext({ fetch, TextDecoder, window: { Meet2Notes: { api, t: key => key } } });
+  const context = vm.createContext({ fetch, TextDecoder, window: { Scribe: { api, t: key => key } } });
   vm.runInContext(source, context);
-  return context.window.Meet2Notes.streamAnswer;
+  return context.window.Scribe.streamAnswer;
 }
 function response(text) {
   const bytes = new TextEncoder().encode(text);

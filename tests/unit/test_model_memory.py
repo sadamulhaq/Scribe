@@ -4,8 +4,8 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from local_meeting_ai.domain.entities import TranscriptionEngineRequest
-from local_meeting_ai.infrastructure.model_memory import ModelMemory
+from scribe.domain.entities import TranscriptionEngineRequest
+from scribe.infrastructure.model_memory import ModelMemory
 
 
 @pytest.mark.asyncio
@@ -62,7 +62,7 @@ async def test_manual_mode_preserves_residency():
 @pytest.mark.parametrize("partial", [False, True])
 async def test_gpu_failure_retries_only_before_any_segments(partial, monkeypatch):
     monkeypatch.setattr(
-        "local_meeting_ai.infrastructure.model_memory.available_vram_mib", lambda index: 8192)
+        "scribe.infrastructure.model_memory.available_vram_mib", lambda index: 8192)
     memory = ModelMemory(lambda: True)
     calls = []
 
@@ -91,7 +91,7 @@ async def test_gpu_failure_retries_only_before_any_segments(partial, monkeypatch
 @pytest.mark.asyncio
 async def test_cold_load_checks_free_memory_even_on_a_large_gpu(monkeypatch):
     monkeypatch.setattr(
-        "local_meeting_ai.infrastructure.model_memory.available_vram_mib", lambda index: 512)
+        "scribe.infrastructure.model_memory.available_vram_mib", lambda index: 512)
     original = Mock(transcribe=AsyncMock(return_value="complete"))
     engine = ModelMemory(lambda: True).wrap("audio", original)
     request = TranscriptionEngineRequest(

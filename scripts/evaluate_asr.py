@@ -1,4 +1,4 @@
-"""Benchmark Meet2Notes ASR engines without using the web application's workers.
+"""Benchmark Scribe ASR engines without using the web application's workers.
 
 Each benchmark is run by an orchestration thread in this separate Python
 process.  The runner unloads every local ASR model before and after each pass,
@@ -25,22 +25,22 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from local_meeting_ai.adapters.transcription.faster_whisper import FasterWhisperEngine
-from local_meeting_ai.adapters.transcription.nvidia_asr import (
+from scribe.adapters.transcription.faster_whisper import FasterWhisperEngine
+from scribe.adapters.transcription.nvidia_asr import (
     build_nemotron_engine,
     build_parakeet_engine,
 )
-from local_meeting_ai.adapters.transcription.router import TranscriptionEngineRouter
-from local_meeting_ai.adapters.transcription.vibevoice import VibeVoiceBitNetEngine
-from local_meeting_ai.application.transcription_profiles import TranscriptionProfileCatalog
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.entities import ModelProfile, SegmentDraft, TranscriptionEngineRequest
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.repositories import SettingsRepository
-from local_meeting_ai.infrastructure.ffmpeg import FFmpegClient
-from local_meeting_ai.paths import AppPaths
+from scribe.adapters.transcription.router import TranscriptionEngineRouter
+from scribe.adapters.transcription.vibevoice import VibeVoiceBitNetEngine
+from scribe.application.transcription_profiles import TranscriptionProfileCatalog
+from scribe.config import AppSettings
+from scribe.domain.entities import ModelProfile, SegmentDraft, TranscriptionEngineRequest
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.repositories import SettingsRepository
+from scribe.infrastructure.ffmpeg import FFmpegClient
+from scribe.paths import AppPaths
 
-logger = logging.getLogger("meet2notes.asr_evaluator")
+logger = logging.getLogger("scribe.asr_evaluator")
 
 DEFAULT_PROFILE_IDS = (
     "default",
@@ -413,7 +413,7 @@ def build_parser() -> argparse.ArgumentParser:
             "available native ASR engine."
         ),
     )
-    parser.add_argument("--data-dir", type=Path, help="Meet2Notes data directory override.")
+    parser.add_argument("--data-dir", type=Path, help="Scribe data directory override.")
     parser.add_argument("--models-dir", type=Path, help="AI models directory override.")
     parser.add_argument(
         "--results-dir",
@@ -631,7 +631,7 @@ def _export_transcript_files(run: dict[str, Any], results_dir: Path) -> list[Pat
         destination = results_dir / "transcripts" / filename
         segments = result["segments"]
         lines = [
-            "Meet2Notes ASR evaluation transcript",
+            "Scribe ASR evaluation transcript",
             f"Run: {run_id}",
             f"Source: {evaluation.get('source_path')}",
             f"Engine: {evaluation.get('engine')}",

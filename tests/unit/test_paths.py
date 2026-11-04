@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.paths import AppPaths, default_models_directory
+from scribe.config import AppSettings
+from scribe.paths import AppPaths, default_models_directory
 
 
 def test_default_models_are_outside_platform_user_data(tmp_path: Path) -> None:

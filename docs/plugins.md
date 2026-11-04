@@ -1,9 +1,9 @@
-# Meet2Notes Plugin API v1
+# Scribe Plugin API v1
 
-Meet2Notes plugins can extend the post-recording pipeline, register selectable
+Scribe plugins can extend the post-recording pipeline, register selectable
 transcription, diarization, summary, and embedding providers, contribute models
 to an existing provider, and provide a RAG vector store. The saved recording and
-canonical transcript remain owned by Meet2Notes; filters work with temporary,
+canonical transcript remain owned by Scribe; filters work with temporary,
 serializable artifacts used by downstream stages.
 
 This page is the user and API reference. Package authors should also read
@@ -18,9 +18,9 @@ code and releases stay in the author's repository. An entry means only that the
 maintainers chose to make the project discoverable; it is not a security audit,
 warranty, or endorsement.
 
-Meet2Notes does not currently download or install this catalog. Users must
+Scribe does not currently download or install this catalog. Users must
 inspect the linked repository and install a chosen package explicitly into the
-private Meet2Notes `.venv`, using the exact command documented by that plugin.
+private Scribe `.venv`, using the exact command documented by that plugin.
 A typical PyPI installation on Windows is:
 
 ```powershell
@@ -46,17 +46,17 @@ and compatibility declarations.
 
 ## Package discovery
 
-Plugins are regular Python packages installed into the private Meet2Notes
+Plugins are regular Python packages installed into the private Scribe
 `.venv`. Declare an entry point in the plugin's `pyproject.toml`:
 
 ```toml
-[project.entry-points."meet2notes.plugins"]
-example = "meet2notes_example.plugin:create_plugin"
+[project.entry-points."scribe.plugins"]
+example = "scribe_example.plugin:create_plugin"
 ```
 
 Discovery does not enable a third-party plugin automatically. There is no
 watched `plugins/` directory: discovery uses installed Python package metadata
-from the `meet2notes.plugins` entry-point group.
+from the `scribe.plugins` entry-point group.
 
 For local development on Windows:
 
@@ -67,7 +67,7 @@ For local development on Windows:
 ## Minimal filter
 
 ```python
-from local_meeting_ai.plugins import (
+from scribe.plugins import (
     HookContext,
     MeetingDocument,
     PluginManifest,
@@ -162,7 +162,7 @@ content is never stored in the plugin execution ledger.
 
 - A Python plugin is executable code. Install and enable only packages you
   trust.
-- Do not read Meet2Notes' SQLite database or model directories directly.
+- Do not read Scribe' SQLite database or model directories directly.
 - Declare permissions accurately. Network access must never be hidden.
 - Do not log transcripts, API keys, tokens, or recording paths.
 - Use declarative provider settings for non-secret configuration and the

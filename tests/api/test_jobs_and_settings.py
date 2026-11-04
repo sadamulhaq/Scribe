@@ -4,11 +4,11 @@ from pathlib import Path
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.api.app import create_app
-from local_meeting_ai.bootstrap import _retire_removed_final_transcription_preferences
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.enums import JobType
-from local_meeting_ai.paths import default_models_directory
+from scribe.api.app import create_app
+from scribe.bootstrap import _retire_removed_final_transcription_preferences
+from scribe.config import AppSettings
+from scribe.domain.enums import JobType
+from scribe.paths import default_models_directory
 
 
 def test_queued_job_can_be_cancelled(client: TestClient) -> None:
@@ -328,7 +328,7 @@ def test_summary_engine_settings_are_extensible_and_do_not_store_keys(
                 "local_runtime": "external-openai",
                 "model": "my-local-model",
                 "base_url": "http://127.0.0.1:8080/v1",
-                "api_key_env": "MEET2NOTES_AI_API_KEY",
+                "api_key_env": "SCRIBE_AI_API_KEY",
                 "context_length": 8192,
                 "batch_size": 256,
                 "micro_batch_size": 64,
@@ -346,7 +346,7 @@ def test_summary_engine_settings_are_extensible_and_do_not_store_keys(
     assert summary["provider"] == "openai-compatible"
     assert summary["batch_size"] == 256
     assert summary["flash_attention"] is False
-    assert summary["api_key_env"] == "MEET2NOTES_AI_API_KEY"
+    assert summary["api_key_env"] == "SCRIBE_AI_API_KEY"
     assert "api_key" not in summary
 
     invalid = client.put(

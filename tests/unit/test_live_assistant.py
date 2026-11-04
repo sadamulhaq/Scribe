@@ -7,32 +7,32 @@ from typing import Any
 
 import pytest
 
-from local_meeting_ai.application.live_assistant import (
+from scribe.application.live_assistant import (
     LIVE_ASSISTANT_DEFAULTS,
     LiveAssistantService,
     _contains_trigger,
     _detected_question,
     _parse_model_response,
 )
-from local_meeting_ai.domain.entities import (
+from scribe.domain.entities import (
     AudioCaptureSource,
     LiveCaptureSession,
     SegmentDraft,
     SummaryResult,
 )
-from local_meeting_ai.domain.enums import SourceType
-from local_meeting_ai.domain.errors import JobCancelledError
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.live_assistant import (
+from scribe.domain.enums import SourceType
+from scribe.domain.errors import JobCancelledError
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.live_assistant import (
     LiveAssistantRepository,
 )
-from local_meeting_ai.infrastructure.database.migrations import MigrationRunner
-from local_meeting_ai.infrastructure.database.repositories import (
+from scribe.infrastructure.database.migrations import MigrationRunner
+from scribe.infrastructure.database.repositories import (
     MeetingRepository,
     SettingsRepository,
     TranscriptionRepository,
 )
-from local_meeting_ai.infrastructure.live_assistant_credentials import (
+from scribe.infrastructure.live_assistant_credentials import (
     MemoryLiveAssistantCredentialStore,
 )
 

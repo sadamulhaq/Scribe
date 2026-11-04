@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const source = fs.readFileSync(path.join(__dirname, '../../src/local_meeting_ai/web/static/js/transcript.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../../src/scribe/web/static/js/transcript.js'), 'utf8');
 const updates = source.slice(source.indexOf('  async function applyJobUpdates('), source.indexOf('  async function initializeWorkspace('));
 const rebuild = source.slice(source.indexOf('  async function rebuildAiNotes('), source.indexOf('  function beginAiNotesEdit('));
 const job = (uuid, job_type, extra = {}) => ({ uuid, job_type, meeting_id: 38, status: 'completed', payload: {}, ...extra });

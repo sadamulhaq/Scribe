@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-from local_meeting_ai.adapters.transcription.nvidia_asr import (
+from scribe.adapters.transcription.nvidia_asr import (
     _decode_parakeet_with_timestamps,
     _parakeet_drafts,
     _parakeet_timestamped_words,

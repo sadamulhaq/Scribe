@@ -12,16 +12,16 @@ from typing import Any
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.api.app import create_app
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.entities import (
+from scribe.api.app import create_app
+from scribe.config import AppSettings
+from scribe.domain.entities import (
     DiarizationSegment,
     MediaProbe,
     SegmentDraft,
     TranscriptionEngineRequest,
     TranscriptionResult,
 )
-from local_meeting_ai.domain.protocols import (
+from scribe.domain.protocols import (
     CancellationCheck,
     ProgressReporter,
     SegmentReporter,
@@ -274,7 +274,7 @@ def test_transcription_pipeline_editor_and_versions(tmp_path: Path) -> None:
         assert 'id="speaker-rebuild-dialog"' in workspace.text
         assert 'id="ai-toggle-view"' in workspace.text
         assert "Who spoke during the meeting" not in workspace.text
-        assert "Use your meeting outside Meet2Notes" not in workspace.text
+        assert "Use your meeting outside Scribe" not in workspace.text
         assert 'id="export-dialog"' in workspace.text
         assert 'data-audio-export="mp3"' in workspace.text
         assert 'data-export-source="transcript" data-export-format="markdown"' in workspace.text

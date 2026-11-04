@@ -7,7 +7,7 @@ WAV or MP4; it does not establish that the recording is too long or corrupted.
 
 ## Automatic preparation
 
-Meet2Notes checks the driver and native libraries in a separate process with a
+Scribe checks the driver and native libraries in a separate process with a
 timeout. This isolates native crashes from the web server. It searches the active
 Python environment's NVIDIA packages, PyTorch libraries, the conda/Pinokio `lib`
 directory, existing absolute `LD_LIBRARY_PATH` entries, `CUDA_HOME` / `CUDA_PATH`,
@@ -36,20 +36,20 @@ No driver installation, sudo command, or system Python modification is attempted
   the diagnostic and repair command. Choose Auto to continue on CPU.
 
 When libraries are missing, Settings offers **Install missing CUDA libraries**
-if Meet2Notes is running in a virtual environment or conda environment. This
+if Scribe is running in a virtual environment or conda environment. This
 downloads NVIDIA packages (potentially more than 1 GB), verifies them, and asks
 for an application restart. The running process keeps using its original runtime
 until restarted. A failed repair reports an error rather than claiming success.
 
-For manual diagnosis, use the same Python that launches Meet2Notes:
+For manual diagnosis, use the same Python that launches Scribe:
 
 ```bash
-.venv/bin/python -m local_meeting_ai.infrastructure.linux_cuda
-.venv/bin/python -m local_meeting_ai.infrastructure.linux_cuda --install
+.venv/bin/python -m scribe.infrastructure.linux_cuda
+.venv/bin/python -m scribe.infrastructure.linux_cuda --install
 ```
 
 For Pinokio, run the command shown in Settings in its application terminal; that
-command uses the exact active Python executable. Restart Meet2Notes afterwards.
+command uses the exact active Python executable. Restart Scribe afterwards.
 
 If a driver check fails, run `nvidia-smi`. Install or repair the NVIDIA driver
 using your distribution's instructions (including Arch/Omarchy); Python packages
@@ -68,7 +68,7 @@ not replace PyTorch or install another transcription model.
 Tested in Linux Docker under WSL2 with an RTX 3070, Python 3.11, Faster Whisper
 1.2.1, CTranslate2 4.8.1 and the small model. A 12-second demo reproduces the
 original missing-cuBLAS failure. With installed NVIDIA pip libraries but no
-`LD_LIBRARY_PATH`, automatic preparation makes the actual Meet2Notes engine
+`LD_LIBRARY_PATH`, automatic preparation makes the actual Scribe engine
 transcribe on GPU. This is not a validation of every Linux distribution, GPU,
 or three-hour workload.
 

@@ -54,7 +54,7 @@ instead of silently duplicating or replacing transcript segments.
 ## Long diarize jobs
 
 The isolated `diarize` worker does not expose a reliable intermediate percentage.
-Meet2Notes reports elapsed time every 15 seconds and displays indeterminate progress
+Scribe reports elapsed time every 15 seconds and displays indeterminate progress
 during that stage. Completion percentages resume for matching and saving results.
 Cancellation is checked while waiting for the worker, rather than only after its
 final response. The blocking pipe read no longer defeats cancellation or the

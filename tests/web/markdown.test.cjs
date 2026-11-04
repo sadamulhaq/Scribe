@@ -4,17 +4,17 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const root = path.resolve(__dirname, '../../src/local_meeting_ai/web');
+const root = path.resolve(__dirname, '../../src/scribe/web');
 const app = fs.readFileSync(path.join(root, 'static/js/app.js'), 'utf8');
 const escapeFunction = app.slice(app.indexOf('  function escapeHTML('), app.indexOf('  function formatDate('));
-const context = vm.createContext({ window: { Meet2Notes: {} } });
-vm.runInContext(`${escapeFunction}\nwindow.Meet2Notes.escapeHTML = escapeHTML;`, context);
+const context = vm.createContext({ window: { Scribe: {} } });
+vm.runInContext(`${escapeFunction}\nwindow.Scribe.escapeHTML = escapeHTML;`, context);
 vm.runInContext(fs.readFileSync(path.join(root, 'static/js/markdown.js'), 'utf8'), context);
-const render = context.window.Meet2Notes.renderMarkdown;
+const render = context.window.Scribe.renderMarkdown;
 
 test('citations resolve only provided evidence, escape titles and leave code intact', () => {
-  context.window.Meet2Notes.t = (key) => key;
-  const cited = context.window.Meet2Notes.renderCitedAnswer;
+  context.window.Scribe.t = (key) => key;
+  const cited = context.window.Scribe.renderCitedAnswer;
   const sources = [
     { citation_id: 'A1', kind: 'transcription', meeting_id: 38, meeting_title: '<Launch>' },
     { citation_id: 'R2', kind: 'excerpt', meeting_id: 39, meeting_title: 'Review', start_ms: 125000 },

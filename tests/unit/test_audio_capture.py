@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from local_meeting_ai.adapters.audio_capture.windows_wasapi import (
+from scribe.adapters.audio_capture.windows_wasapi import (
     _default_loopback_index,
     _prefer_native_sources,
 )
-from local_meeting_ai.application.capture_service import _trim_duplicate_prefix
-from local_meeting_ai.domain.entities import AudioCaptureSource
+from scribe.application.capture_service import _trim_duplicate_prefix
+from scribe.domain.entities import AudioCaptureSource
 
 
 def _source(

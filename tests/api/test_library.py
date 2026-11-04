@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.domain.entities import SegmentDraft
-from local_meeting_ai.domain.enums import SourceType
-from local_meeting_ai.infrastructure.database.library import LibraryRepository
+from scribe.domain.entities import SegmentDraft
+from scribe.domain.enums import SourceType
+from scribe.infrastructure.database.library import LibraryRepository
 
 
 def completed(client: TestClient, title: str, text: str) -> tuple[int, int]:

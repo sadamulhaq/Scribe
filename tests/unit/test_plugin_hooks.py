@@ -4,15 +4,15 @@ import time
 
 import pytest
 
-from local_meeting_ai.application.rag_vector_store import RagVectorStoreGateway
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.migrations import MigrationRunner
-from local_meeting_ai.infrastructure.database.rag_repository import RagRepository
-from local_meeting_ai.infrastructure.database.repositories import (
+from scribe.application.rag_vector_store import RagVectorStoreGateway
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.migrations import MigrationRunner
+from scribe.infrastructure.database.rag_repository import RagRepository
+from scribe.infrastructure.database.repositories import (
     PluginExecutionRepository,
     SettingsRepository,
 )
-from local_meeting_ai.plugins.contracts import (
+from scribe.plugins.contracts import (
     HookContext,
     MeetingDocument,
     PluginManifest,
@@ -21,7 +21,7 @@ from local_meeting_ai.plugins.contracts import (
     VectorStoreDescriptor,
     VectorStoreOperation,
 )
-from local_meeting_ai.plugins.manager import HookBus, PluginManager, PluginRegistrar
+from scribe.plugins.manager import HookBus, PluginManager, PluginRegistrar
 
 
 def _document() -> MeetingDocument:
@@ -73,7 +73,7 @@ async def test_builtin_filter_is_non_destructive_and_audited(plugin_services) ->
     assert filtered.segments[0].text == "Hola a todos."
     assert filtered.metadata["analysis_cleanup_segments"] == 1
     audit = executions.recent()
-    assert audit[0]["plugin_id"] == "meet2notes.analysis-cleanup"
+    assert audit[0]["plugin_id"] == "scribe.analysis-cleanup"
     assert audit[0]["status"] == "completed"
     assert audit[0]["input_digest"] != audit[0]["output_digest"]
     assert "Hola" not in str(audit[0])
@@ -84,7 +84,7 @@ async def test_disabling_plugin_removes_its_hooks(plugin_services) -> None:  # t
     settings, executions = plugin_services
     manager = PluginManager(settings, executions)
 
-    disabled = manager.set_enabled("meet2notes.analysis-cleanup", False)
+    disabled = manager.set_enabled("scribe.analysis-cleanup", False)
     result = await manager.hooks.apply_filters(
         "analysis.before",
         _document(),

@@ -1,12 +1,12 @@
 # Safe updates
 
-Meet2Notes checks GitHub once every 24 hours for a newer stable Release. The check
+Scribe checks GitHub once every 24 hours for a newer stable Release. The check
 runs before the local server starts, has a short timeout, sends no meeting data,
 and is silently skipped when GitHub is unavailable. Declining an update defers
 the same notification for another 24 hours.
 
 Only stable tags in the form `vX.Y.Z` from
-`https://github.com/estebanstifli/Meet2Notes.git` are accepted. Development
+`https://github.com/sadamulhaq/Scribe.git` are accepted. Development
 commits from `main`, drafts, and prereleases are never offered to users.
 
 ## What is preserved
@@ -23,7 +23,7 @@ forward-only numbered migration; an applied migration must never be edited.
 
 ## Update transaction
 
-`update.bat` refuses to continue while Meet2Notes is running, when tracked or
+`update.bat` refuses to continue while Scribe is running, when tracked or
 untracked source changes exist, when the remote is not the official repository,
 or when the release is not a fast-forward from the installed revision.
 
@@ -47,7 +47,7 @@ manually if a later runtime problem is discovered.
 ## Maintainer release process
 
 1. Update the version in `pyproject.toml` and
-   `src/local_meeting_ai/__init__.py`.
+   `src/scribe/__init__.py`.
 2. Merge to `main` and wait for the `quality` workflow to pass.
 3. Add the matching version section to `CHANGELOG.md` and run the manual
    `release` workflow with that exact version, such as `1.2.3`.
