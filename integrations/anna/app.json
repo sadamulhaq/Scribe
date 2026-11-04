@@ -6,12 +6,12 @@
   "tagline": "Search your meeting history, read transcripts, and retrieve AI notes.",
   "description": "Bring your Scribe meeting library into Anna.\n\nFind meetings by title or description, search exact words in transcripts, or retrieve related excerpts through semantic search. Read transcripts with speaker labels and timestamps, view existing AI notes, and use retrieved evidence in Anna chat to explore decisions and follow-up tasks.\n\nRequirements: Windows 10 or later (x86_64), a separate Scribe installation with MCP access enabled, and Anna Local Agent running on the same computer. Semantic search requires an existing Scribe RAG index. Keep Scribe open while using the app.\n\nThis integration provides read-only access. Recording, transcription, note generation, editing, and index management remain in the Scribe desktop application.\n\nPrivacy: original recordings and the meeting library remain on your computer. Retrieved text and metadata pass through Anna and may be processed by its AI provider when used in chat. This integration does not upload audio or copy your entire database.",
   "category": "productivity",
-  "homepage_url": "https://meet2notes.eu",
+  "homepage_url": "https://github.com/sadamulhaq/Scribe",
   "bundled_executas": {
     "scribe-library": {
       "path": "./executas/scribe"
     }
   },
   "support_url": "https://github.com/sadamulhaq/Scribe/issues",
-  "logo_url": "https://meet2notes.eu/assets/meet2notes-logo.png"
+  "logo_url": "https://raw.githubusercontent.com/sadamulhaq/Scribe/master/capturas/scribe_logo.png"
 }

@@ -100,7 +100,7 @@ scribe = "scribe.cli:main"
 scribe-models = "scribe.model_setup:main"
 
 [project.urls]
-Homepage = "https://meet2notes.eu"
+Homepage = "https://github.com/sadamulhaq/Scribe"
 Repository = "https://github.com/sadamulhaq/Scribe"
 Issues = "https://github.com/sadamulhaq/Scribe/issues"
 
