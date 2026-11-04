@@ -66,7 +66,7 @@ find_python() {
 }
 
 cd "${INSTALLER_ROOT}"
-printf "\033[34mMeet2Notes installer\033[0m\n"
+printf "\033[34mScribe installer\033[0m\n"
 echo "Private local transcription, diarization, and meeting summaries"
 
 if [[ ! -x "${ENVIRONMENT_ROOT}/bin/python" ]]; then
@@ -80,7 +80,7 @@ if [[ ! -x "${ENVIRONMENT_ROOT}/bin/python" ]]; then
 fi
 
 PYTHON="${ENVIRONMENT_ROOT}/bin/python"
-step "Installing Meet2Notes and native audio/AI runtimes"
+step "Installing Scribe and native audio/AI runtimes"
 "${PYTHON}" -m pip install --upgrade pip setuptools wheel
 
 PYTHON_MINOR="$("${PYTHON}" -c 'import sys; print(sys.version_info.minor)')"
@@ -117,7 +117,7 @@ step "Installing PyTorch ${RESOLVED_BACKEND} runtime inside .venv"
 "${PYTHON}" -m pip install -e ".[capture,transcription,diarization,nvidia-asr,pyannote-diarization]"
 "${PYTHON}" -m pip install "huggingface-hub>=0.27,<2"
 if [[ "${RESOLVED_BACKEND}" == "cuda" ]]; then
-  "${PYTHON}" -m local_meeting_ai.infrastructure.linux_cuda --install-if-needed
+  "${PYTHON}" -m scribe.infrastructure.linux_cuda --install-if-needed
 fi
 
 LLAMA_BACKEND="cpu"
@@ -166,7 +166,7 @@ fi
 if [[ "${MODELS}" == "all" ]]; then
   step "Downloading and verifying the recommended local AI models"
   MODEL_ARGUMENTS=(
-    -m local_meeting_ai.model_setup
+    -m scribe.model_setup
     --models all
     --whisper-model "${WHISPER_MODEL}"
     --llm-profile "${LLM_PROFILE}"
@@ -182,9 +182,9 @@ step "Verifying the installation"
 "${PYTHON}" -m pip check
 "${PYTHON}" scripts/check_environment.py
 
-printf "\n\033[32mMeet2Notes is ready.\033[0m\n"
-echo "Run: .venv/bin/meet2notes"
+printf "\n\033[32mScribe is ready.\033[0m\n"
+echo "Run: .venv/bin/scribe"
 
 if [[ "${START}" == "true" ]]; then
-  "${ENVIRONMENT_ROOT}/bin/meet2notes"
+  "${ENVIRONMENT_ROOT}/bin/scribe"
 fi

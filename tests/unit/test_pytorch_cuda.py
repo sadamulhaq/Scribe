@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from local_meeting_ai.infrastructure import pytorch_cuda
-from local_meeting_ai.infrastructure.pytorch_cuda import PytorchCudaRuntime
+from scribe.infrastructure import pytorch_cuda
+from scribe.infrastructure.pytorch_cuda import PytorchCudaRuntime
 
 
 def test_cuda_install_uses_the_private_interpreter_and_cuda_index(
@@ -23,7 +23,7 @@ def test_cuda_install_uses_the_private_interpreter_and_cuda_index(
 
     monkeypatch.setattr(pytorch_cuda.subprocess, "Popen", fake_popen)
 
-    runtime = PytorchCudaRuntime("C:/Meet2Notes/.venv/Scripts/python.exe")
+    runtime = PytorchCudaRuntime("C:/Scribe/.venv/Scripts/python.exe")
     monkeypatch.setattr(
         runtime,
         "status",
@@ -41,7 +41,7 @@ def test_cuda_install_uses_the_private_interpreter_and_cuda_index(
     assert result["restart_required"] is True
     assert commands == [
         [
-            "C:/Meet2Notes/.venv/Scripts/python.exe",
+            "C:/Scribe/.venv/Scripts/python.exe",
             "-m",
             "pip",
             "install",
@@ -73,7 +73,7 @@ def test_cuda_status_requires_restart_without_reinstalling_the_cuda_wheel(
     )
     monkeypatch.setattr(pytorch_cuda.shutil, "which", lambda _name: "nvidia-smi")
 
-    status = PytorchCudaRuntime("C:/Meet2Notes/.venv/Scripts/python.exe").status()
+    status = PytorchCudaRuntime("C:/Scribe/.venv/Scripts/python.exe").status()
 
     assert status["state"] == "restart_required"
     assert status["restart_required"] is True

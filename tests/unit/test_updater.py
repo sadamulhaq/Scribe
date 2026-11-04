@@ -8,12 +8,12 @@ from typing import Any
 
 import pytest
 
-from local_meeting_ai import updater
-from local_meeting_ai.application.ai_services import configured_values
-from local_meeting_ai.domain.enums import SourceType
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.migrations import MigrationRunner
-from local_meeting_ai.infrastructure.database.repositories import (
+from scribe import updater
+from scribe.application.ai_services import configured_values
+from scribe.domain.enums import SourceType
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.migrations import MigrationRunner
+from scribe.infrastructure.database.repositories import (
     MeetingRepository,
     SettingsRepository,
 )
@@ -41,8 +41,8 @@ def test_release_check_uses_semver_and_cache(
             json.dumps(
                 {
                     "tag_name": "v0.6.0",
-                    "name": "Meet2Notes 0.6.0",
-                    "html_url": "https://github.com/estebanstifli/Meet2Notes/releases/v0.6.0",
+                    "name": "Scribe 0.6.0",
+                    "html_url": "https://github.com/sadamulhaq/Scribe/releases/v0.6.0",
                     "published_at": "2026-08-23T12:00:00Z",
                     "draft": False,
                     "prerelease": False,
@@ -131,8 +131,8 @@ def test_pre_update_backup_preserves_settings_meetings_and_rag(
         updater.ReleaseInfo(
             tag="v0.6.0",
             version="0.6.0",
-            name="Meet2Notes 0.6.0",
-            url="https://github.com/estebanstifli/Meet2Notes/releases/tag/v0.6.0",
+            name="Scribe 0.6.0",
+            url="https://github.com/sadamulhaq/Scribe/releases/tag/v0.6.0",
         ),
         ["--data-dir", str(data), "--port", "8899"],
     )

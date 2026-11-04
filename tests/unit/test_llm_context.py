@@ -2,9 +2,9 @@ from types import SimpleNamespace
 
 import pytest
 
-from local_meeting_ai.adapters.prompt_cache import cache_arguments
-from local_meeting_ai.adapters.summary.llama_cpp import LlamaCppSummaryEngine
-from local_meeting_ai.infrastructure.llm_context import discover_context, size_context
+from scribe.adapters.prompt_cache import cache_arguments
+from scribe.adapters.summary.llama_cpp import LlamaCppSummaryEngine
+from scribe.infrastructure.llm_context import discover_context, size_context
 
 
 def test_remote_budget_grows_past_old_ceiling_but_manual_stays_fixed():
@@ -35,7 +35,7 @@ def test_ollama_metadata_discovery_does_not_send_transcript(monkeypatch):
         return httpx.Response(200, json={"model_info": {"qwen3.context_length": 32768}},
                               request=httpx.Request("POST", url))
 
-    monkeypatch.setattr("local_meeting_ai.infrastructure.llm_context.httpx.post", post)
+    monkeypatch.setattr("scribe.infrastructure.llm_context.httpx.post", post)
     config = {"provider": "litellm", "model": "ollama_chat/qwen3:8b"}
     assert discover_context(config)["model_context_limit"] == 32768
     assert "model_context_limit" not in config

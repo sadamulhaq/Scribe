@@ -2,7 +2,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const source = fs.readFileSync('src/local_meeting_ai/web/static/js/transcript.js', 'utf8');
+const source = fs.readFileSync('src/scribe/web/static/js/transcript.js', 'utf8');
 const state = () => {
   const nodes = new Map();
   const context = { activeJob: null, t: key => key, document: {

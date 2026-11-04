@@ -5,7 +5,7 @@
       "method": "shell.run",
       "params": {
         "conda": ".pinokio",
-        "message": "python -m local_meeting_ai --no-browser",
+        "message": "python -m scribe --no-browser",
         "on": [
           {
             "event": "/(http:\\/\\/127\\.0\\.0\\.1:[0-9]+)/",

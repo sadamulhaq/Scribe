@@ -7,7 +7,7 @@ Its 1.16 GB GGUF uses the same verified native runtime; Ollama is not required.
 For 4 GB NVIDIA laptops start at 8K. Automatic selection covers compatible NVIDIA GPUs with 3–7 GB VRAM; see [measured results and limitations](bonsai-8b-validation.md).
 
 Windows `install.ps1` / `install-update.bat`, Linux/macOS `install.sh`, Pinokio,
-and `meet2notes-models` use the same recommendation code. It runs `nvidia-smi`
+and `scribe-models` use the same recommendation code. It runs `nvidia-smi`
 and reads total RAM; it does not import a model or benchmark inference.
 
 | Hardware for a fresh installation | Selected LLM | Initial context |
@@ -86,7 +86,7 @@ transaction. An explicit `--llm-profile` replaces the chosen profile after downl
 .\install.ps1 -LlmProfile light -AiBackend cpu
 .\install.ps1 -LlmProfile bonsai-ternary
 .\install.ps1 -LlmProfile none
-.\.venv\Scripts\meet2notes-models.exe --models summary --llm-profile bonsai-1bit
+.\.venv\Scripts\scribe-models.exe --models summary --llm-profile bonsai-1bit
 ```
 
 ```bash
@@ -94,7 +94,7 @@ transaction. An explicit `--llm-profile` replaces the chosen profile after downl
 ./install.sh --llm-profile light --ai-backend cpu
 ./install.sh --llm-profile bonsai-ternary
 ./install.sh --llm-profile none
-meet2notes-models --models summary --llm-profile bonsai-1bit
+scribe-models --models summary --llm-profile bonsai-1bit
 ```
 
 `none` skips only LLM installation. Existing `-Models none` / `--no-models` options

@@ -10,23 +10,23 @@ from pathlib import Path
 from typing import ClassVar
 
 ROOT = Path(__file__).resolve().parents[1]
-LOCALES = ROOT / "src" / "local_meeting_ai" / "web" / "static" / "locales"
-SCRIPTS = ROOT / "src" / "local_meeting_ai" / "web" / "static" / "js"
-TEMPLATES = ROOT / "src" / "local_meeting_ai" / "web" / "templates"
-KEY_USE = re.compile(r'(?:Meet2Notes\.)?\bt\("([^"]+)"')
+LOCALES = ROOT / "src" / "scribe" / "web" / "static" / "locales"
+SCRIPTS = ROOT / "src" / "scribe" / "web" / "static" / "js"
+TEMPLATES = ROOT / "src" / "scribe" / "web" / "templates"
+KEY_USE = re.compile(r'(?:Scribe\.)?\bt\("([^"]+)"')
 TECHNICAL_LITERALS = {
     ".venv",
     "0%",
     "00:00",
     "404",
     "English",
-    "Meet2Notes",
+    "Scribe",
     "\N{MULTIPLICATION SIGN}",
     "\N{EM DASH}",
     "\N{CHECK MARK}",
     "http://127.0.0.1:11434",
     "http://127.0.0.1:8080/v1",
-    "https://automation.example.com/meet2notes",
+    "https://automation.example.com/scribe",
 }
 IMMUTABLE_UI_TERMS = {
     "RAG",

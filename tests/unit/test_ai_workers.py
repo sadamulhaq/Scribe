@@ -7,16 +7,16 @@ from typing import Any
 
 import pytest
 
-from local_meeting_ai.adapters.diarization.profile_matching import (
+from scribe.adapters.diarization.profile_matching import (
     SherpaOnnxSpeakerProfileMatcher,
 )
-from local_meeting_ai.adapters.diarization.sherpa_onnx import (
+from scribe.adapters.diarization.sherpa_onnx import (
     SherpaOnnxDiarizationEngine,
 )
-from local_meeting_ai.adapters.summary.llama_cpp import LlamaCppSummaryEngine
-from local_meeting_ai.adapters.transcription.faster_whisper import FasterWhisperEngine
-from local_meeting_ai.application.summary_templates import render_summary_template
-from local_meeting_ai.domain.entities import ModelProfile
+from scribe.adapters.summary.llama_cpp import LlamaCppSummaryEngine
+from scribe.adapters.transcription.faster_whisper import FasterWhisperEngine
+from scribe.application.summary_templates import render_summary_template
+from scribe.domain.entities import ModelProfile
 
 
 def test_diarization_uses_an_independent_worker(tmp_path: Path) -> None:

@@ -2,9 +2,9 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from local_meeting_ai.application import audio_setup
-from local_meeting_ai.infrastructure.audio_hardware import recommend_audio
-from local_meeting_ai.infrastructure.summary_hardware import Hardware, NvidiaGpu
+from scribe.application import audio_setup
+from scribe.infrastructure.audio_hardware import recommend_audio
+from scribe.infrastructure.summary_hardware import Hardware, NvidiaGpu
 
 
 @pytest.mark.asyncio

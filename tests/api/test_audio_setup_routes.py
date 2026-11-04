@@ -1,8 +1,8 @@
 from unittest.mock import AsyncMock
 
-from local_meeting_ai.application import audio_setup
-from local_meeting_ai.domain.enums import JobType
-from local_meeting_ai.infrastructure.audio_hardware import AudioRecommendation
+from scribe.application import audio_setup
+from scribe.domain.enums import JobType
+from scribe.infrastructure.audio_hardware import AudioRecommendation
 
 
 def test_preview_is_read_only_and_install_rejects_active_jobs(client, monkeypatch):

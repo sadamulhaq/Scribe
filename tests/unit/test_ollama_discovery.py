@@ -7,9 +7,9 @@ from typing import Any
 import httpx
 import pytest
 
-from local_meeting_ai.adapters.summary import llama_cpp
-from local_meeting_ai.domain.errors import ValidationError
-from local_meeting_ai.infrastructure import ollama
+from scribe.adapters.summary import llama_cpp
+from scribe.domain.errors import ValidationError
+from scribe.infrastructure import ollama
 
 
 def fake_api(monkeypatch: Any, handler: Any) -> None:

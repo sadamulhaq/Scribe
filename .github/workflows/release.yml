@@ -37,7 +37,7 @@ jobs:
           if not re.fullmatch(r"\d+\.\d+\.\d+", expected):
               raise SystemExit("Release version must use stable SemVer: X.Y.Z")
           project = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
-          init = Path("src/local_meeting_ai/__init__.py").read_text(encoding="utf-8")
+          init = Path("src/scribe/__init__.py").read_text(encoding="utf-8")
           declared = re.search(r'__version__\s*=\s*"([^"]+)"', init)
           versions = {project["project"]["version"], declared.group(1) if declared else None}
           if versions != {expected}:
@@ -87,5 +87,5 @@ jobs:
           gh release create "v${RELEASE_VERSION}" \
             --latest \
             --target "${GITHUB_SHA}" \
-            --title "Meet2Notes ${RELEASE_VERSION}" \
+            --title "Scribe ${RELEASE_VERSION}" \
             --notes-file release-notes.md

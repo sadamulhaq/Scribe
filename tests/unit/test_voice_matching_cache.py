@@ -9,15 +9,15 @@ from unittest.mock import Mock
 import numpy as np
 import pytest
 
-from local_meeting_ai.adapters.diarization import profile_matching
-from local_meeting_ai.adapters.diarization.voice_sampling import (
+from scribe.adapters.diarization import profile_matching
+from scribe.adapters.diarization.voice_sampling import (
     exclusive_ranges,
     identify,
     sample_ranges,
 )
-from local_meeting_ai.domain.entities import DiarizationSegment
-from local_meeting_ai.domain.errors import JobCancelledError
-from local_meeting_ai.infrastructure.voiceprint_cache import VoiceprintCache, voiceprint_cache_path
+from scribe.domain.entities import DiarizationSegment
+from scribe.domain.errors import JobCancelledError
+from scribe.infrastructure.voiceprint_cache import VoiceprintCache, voiceprint_cache_path
 
 
 def make_wave(path: Path, seconds: int = 70) -> Path:
@@ -66,7 +66,7 @@ def test_short_turn_fallback_stays_centered_inside_turn():
 async def test_saved_voice_uses_selected_samples_without_exporting_full_speech(tmp_path):
     from unittest.mock import AsyncMock
 
-    from local_meeting_ai.application.speaker_service import SpeakerService
+    from scribe.application.speaker_service import SpeakerService
 
     turns = [SimpleNamespace(speaker_id=1, start_ms=i * 20000, end_ms=i * 20000 + 12000)
              for i in range(12)]
@@ -184,7 +184,7 @@ def test_uncertain_match_expands_samples_and_reuses_expanded_cache(fixture):
 
 
 def test_deleting_saved_voice_removes_its_cache(tmp_path):
-    from local_meeting_ai.application.speaker_service import SpeakerService
+    from scribe.application.speaker_service import SpeakerService
 
     sample = make_wave(tmp_path / "profile.wav", 2)
     cache = voiceprint_cache_path(sample)

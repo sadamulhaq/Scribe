@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.domain.enums import SourceType
+from scribe.domain.enums import SourceType
 
 
 def test_live_assistant_settings_and_separate_credential(client: TestClient) -> None:

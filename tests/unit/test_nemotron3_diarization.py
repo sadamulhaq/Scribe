@@ -8,13 +8,13 @@ from unittest.mock import Mock
 
 import pytest
 
-from local_meeting_ai.adapters.diarization.nemotron3 import (
+from scribe.adapters.diarization.nemotron3 import (
     MODEL_REVISION,
     TRANSFORMERS_REVISION,
     Nemotron3DiarizationEngine,
 )
-from local_meeting_ai.adapters.diarization.nemotron3_worker import audio_chunks, clip_segments
-from local_meeting_ai.domain.errors import CapabilityUnavailableError, JobCancelledError
+from scribe.adapters.diarization.nemotron3_worker import audio_chunks, clip_segments
+from scribe.domain.errors import CapabilityUnavailableError, JobCancelledError
 
 
 @pytest.fixture

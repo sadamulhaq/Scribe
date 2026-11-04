@@ -17,7 +17,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("captures", type=Path)
-    parser.add_argument("--output", type=Path, default=Path("docs/assets/meet2notes-demo.gif"))
+    parser.add_argument("--output", type=Path, default=Path("docs/assets/scribe-demo.gif"))
     parser.add_argument("--font", type=Path, required=True, help="Path to a TrueType font")
     parser.add_argument("--fast", action="store_true", help="Use the exact six-second timing")
     args = parser.parse_args()
@@ -43,7 +43,7 @@ def main() -> None:
     def compose(path: Path, scene: int) -> Image.Image:
         canvas = Image.new("RGB", (1360, 860), "#101e36")
         draw = ImageDraw.Draw(canvas)
-        draw.text((40, 19), "Meet2Notes", font=font, fill="#ffffff")
+        draw.text((40, 19), "Scribe", font=font, fill="#ffffff")
         draw.text((250, 24), subtitles[scene], font=small, fill="#b9cce9")
         draw.rounded_rectangle((1225, 19, 1320, 49), 15, fill="#233b61")
         draw.text((1243, 23), f"0{scene + 1} / 06", font=small, fill="#d8e7ff")

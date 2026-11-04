@@ -1,15 +1,15 @@
 module.exports = {
   version: "8.0.0",
-  title: "Meet2Notes",
+  title: "Scribe",
   description:
     "Private, local-first AI meeting assistant for recording, transcription, speaker diarization, searchable meeting history, and structured notes.",
-  icon: "src/local_meeting_ai/web/static/icons/mark.svg",
+  icon: "src/scribe/web/static/icons/mark.svg",
   menu: async (_kernel, info) => {
     if (info.running("install.json") || info.running("update.json")) {
       return [
         {
           icon: "fa-solid fa-spinner",
-          text: "Preparing Meet2Notes...",
+          text: "Preparing Scribe...",
           href: info.running("install.json") ? "install.json" : "update.json",
           default: true,
         },
@@ -20,7 +20,7 @@ module.exports = {
       return [
         {
           icon: "fa-solid fa-download",
-          text: "Install Meet2Notes",
+          text: "Install Scribe",
           href: "install.json",
           default: true,
         },
@@ -39,7 +39,7 @@ module.exports = {
       if (memory && memory.url) {
         menu.unshift({
           icon: "fa-solid fa-arrow-up-right-from-square",
-          text: "Open Meet2Notes",
+          text: "Open Scribe",
           href: memory.url,
           default: true,
         })
@@ -50,7 +50,7 @@ module.exports = {
     return [
       {
         icon: "fa-solid fa-play",
-        text: "Start Meet2Notes",
+        text: "Start Scribe",
         href: "start.json",
         default: true,
       },
