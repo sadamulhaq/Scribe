@@ -47,20 +47,20 @@ model presets, and flexible context with provider-aware prompt caching.
 - Install its pinned Transformers preview in a private runtime; reuse the
   existing saved-voice embedding/cosine matcher, model unloading, and cancellation.
 - Report analyzed audio duration throughout diarization and expose the engine
-  in Settings and `meet2notes-models --models nvidia-nemotron-3-diarization`.
+  in Settings and `scribe-models --models nvidia-nemotron-3-diarization`.
 
 ### Validation and practical limits
 
 - Real API cache checks succeeded with OpenAI GPT-6 Luna, Claude Sonnet 5.5 and
   Gemini 3.5 Flash-Lite. Native Bonsai reuse was also verified. Gemini reused only
   part of the prefix; no provider cache hit or latency is guaranteed. See
-  [context and cache validation](https://github.com/estebanstifli/Meet2Notes/blob/v0.9.0/docs/automatic-context-cache.md).
+  [context and cache validation](https://github.com/sadamulhaq/Scribe/blob/v0.9.0/docs/automatic-context-cache.md).
 - The latest ITV Nemotron run matched all eight saved voices in 7.873 seconds;
   a cached repeat took 0.098 seconds. Profiles came from the same recording,
   so this does not establish recognition accuracy on new recordings.
 - Bonsai 8B memory checks include a constrained Linux environment, not a physical
   RTX 3050 Mobile benchmark. Long-context answer-quality limitations are recorded
-  in [the validation report](https://github.com/estebanstifli/Meet2Notes/blob/v0.9.0/docs/bonsai-8b-validation.md).
+  in [the validation report](https://github.com/sadamulhaq/Scribe/blob/v0.9.0/docs/bonsai-8b-validation.md).
 
 ### Updating to 0.9.0
 
@@ -81,7 +81,7 @@ model presets, and flexible context with provider-aware prompt caching.
   to apply the new interior selection to its audio.
 - LiteLLM is upgraded to at least 1.103.1 by the normal dependency update.
   No manual database migration is required. See
-  [safe updates](https://github.com/estebanstifli/Meet2Notes/blob/v0.9.0/docs/updating.md).
+  [safe updates](https://github.com/sadamulhaq/Scribe/blob/v0.9.0/docs/updating.md).
 
 ## 0.8.0 - 2026-09-30
 
@@ -92,7 +92,7 @@ hardware-aware audio/LLM setup, Linux CUDA repair and long-recording fixes.
 Watch the [performance demo](https://www.youtube.com/watch?v=pDUrVM5XTZw): three
 short follow-up answers on an RTX 3070 (8 GB VRAM, 32 GB system RAM), with
 1.62–1.83 s to first text after the initial 75.68 s cold request. See
-[measurement details](https://github.com/estebanstifli/Meet2Notes/blob/v0.8.0/docs/performance-demo.md)
+[measurement details](https://github.com/sadamulhaq/Scribe/blob/v0.8.0/docs/performance-demo.md)
 for conditions and limitations.
 
 ### Changes
@@ -194,10 +194,10 @@ for conditions and limitations.
 
 ### Updating to 0.8.0
 
-- **Windows launcher:** stop Meet2Notes, then run `update.bat` or rerun
+- **Windows launcher:** stop Scribe, then run `update.bat` or rerun
   `install-update.bat`. The stable-Release updater creates a database backup,
   validates dependencies and verifies the saved managed LLM's files.
-- **Pinokio:** stop Meet2Notes, select **Update**, then **Start Meet2Notes**.
+- **Pinokio:** stop Scribe, select **Update**, then **Start Scribe**.
   Update pulls the current branch, refreshes the private runtime, checks Linux
   CUDA libraries and verifies the saved managed LLM without loading it.
 - **macOS/Linux source installation:** stop the app, pull the updated source and
@@ -211,7 +211,7 @@ for conditions and limitations.
   CPU/unsupported systems retain LFM. Installation downloads files without inference.
 - Restart after updating the backend or repairing CUDA libraries. Keep a backup
   of important data before manual updates. See
-  [safe updates](https://github.com/estebanstifli/Meet2Notes/blob/v0.8.0/docs/updating.md).
+  [safe updates](https://github.com/sadamulhaq/Scribe/blob/v0.8.0/docs/updating.md).
 
 ## 0.7.0 - 2026-09-29
 
@@ -228,7 +228,7 @@ for conditions and limitations.
 
 ### Updating to 0.7.0
 
-- **Pinokio:** stop Meet2Notes, select **Update**, then **Start Meet2Notes**.
+- **Pinokio:** stop Scribe, select **Update**, then **Start Scribe**.
   Update pulls the repository's current branch and refreshes its private runtime.
 - **Windows launcher:** rerun `install-update.bat` or use `update.bat` to detect
   this stable GitHub Release and apply the backed-up update.
@@ -320,10 +320,10 @@ for conditions and limitations.
 
 ## 0.4.0 - 2026-07-26
 
-- Renamed the application and all public entry points to Meet2Notes.
+- Renamed the application and all public entry points to Scribe.
 - Added one-command Windows, macOS, and Linux installation with platform-aware
   llama.cpp acceleration and safe CPU fallback.
-- Added `meet2notes-models` for automatic download and verification of Faster
+- Added `scribe-models` for automatic download and verification of Faster
   Whisper, sherpa-onnx, and LFM2.5 models.
 - Preserved existing LocalMeet2Resume data directories to avoid breaking stored
   recording paths during the rename.

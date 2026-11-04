@@ -6,10 +6,10 @@ from types import SimpleNamespace
 
 import pytest
 
-from local_meeting_ai.adapters.summary import llama_cpp
-from local_meeting_ai.api.answer_stream import answer_stream
-from local_meeting_ai.application.answer_stream import AnswerProgress
-from local_meeting_ai.domain.errors import CapabilityUnavailableError, JobCancelledError
+from scribe.adapters.summary import llama_cpp
+from scribe.api.answer_stream import answer_stream
+from scribe.application.answer_stream import AnswerProgress
+from scribe.domain.errors import CapabilityUnavailableError, JobCancelledError
 
 
 @pytest.fixture

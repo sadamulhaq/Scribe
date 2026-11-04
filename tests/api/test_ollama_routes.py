@@ -4,7 +4,7 @@ from typing import Any
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.infrastructure import ollama
+from scribe.infrastructure import ollama
 
 
 def test_ollama_discovery_does_not_change_saved_preferences(

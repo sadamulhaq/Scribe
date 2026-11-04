@@ -6,14 +6,14 @@ from typing import Any
 
 import pytest
 
-from local_meeting_ai.domain.errors import ValidationError
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.migrations import MigrationRunner
-from local_meeting_ai.infrastructure.database.repositories import (
+from scribe.domain.errors import ValidationError
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.migrations import MigrationRunner
+from scribe.infrastructure.database.repositories import (
     PluginExecutionRepository,
     SettingsRepository,
 )
-from local_meeting_ai.plugins import (
+from scribe.plugins import (
     PluginManifest,
     PluginRegistrar,
     PluginSettingField,
@@ -21,8 +21,8 @@ from local_meeting_ai.plugins import (
     ProviderModel,
     ProviderRuntimeContext,
 )
-from local_meeting_ai.plugins.manager import PluginManager
-from local_meeting_ai.plugins.providers import ProviderRegistry
+from scribe.plugins.manager import PluginManager
+from scribe.plugins.providers import ProviderRegistry
 
 
 class FakeTranscriptionEngine:
@@ -97,7 +97,7 @@ class FakeEntryPoint:
 
 class FakeEntryPoints(list[FakeEntryPoint]):
     def select(self, **params: str) -> FakeEntryPoints:
-        return self if params.get("group") == "meet2notes.plugins" else FakeEntryPoints()
+        return self if params.get("group") == "scribe.plugins" else FakeEntryPoints()
 
 
 @pytest.fixture
@@ -116,7 +116,7 @@ def provider_services(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):  # type:
 
     registry = ProviderRegistry(
         ProviderRuntimeContext(
-            plugin_id="meet2notes.core",
+            plugin_id="scribe.core",
             data_dir=tmp_path / "data",
             models_dir=tmp_path / "models",
             _settings_provider=settings_for,
@@ -168,7 +168,7 @@ def test_plugin_provider_is_lazy_configurable_and_hot_removable(provider_service
 def test_model_extension_can_target_an_existing_provider(tmp_path: Path) -> None:
     registry = ProviderRegistry(
         ProviderRuntimeContext(
-            plugin_id="meet2notes.core",
+            plugin_id="scribe.core",
             data_dir=tmp_path / "data",
             models_dir=tmp_path / "models",
             _settings_provider=lambda _plugin_id: {},

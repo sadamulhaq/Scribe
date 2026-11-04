@@ -5,8 +5,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from local_meeting_ai.adapters.diarization import diarize_cpu
-from local_meeting_ai.domain.errors import JobCancelledError
+from scribe.adapters.diarization import diarize_cpu
+from scribe.domain.errors import JobCancelledError
 
 
 def test_long_analysis_reports_elapsed_time_without_fake_percentage(tmp_path, monkeypatch):

@@ -1,5 +1,5 @@
-from local_meeting_ai.application.speaker_text import speaker_turn_text
-from local_meeting_ai.domain.entities import SpeakerTurn, TranscriptSegment
+from scribe.application.speaker_text import speaker_turn_text
+from scribe.domain.entities import SpeakerTurn, TranscriptSegment
 
 
 def test_speaker_turn_text_clips_segment_using_word_timestamps() -> None:

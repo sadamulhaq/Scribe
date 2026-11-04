@@ -8,14 +8,14 @@ from typing import Any
 import pytest
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.adapters.embeddings import (
+from scribe.adapters.embeddings import (
     EmbeddingEngineRouter,
     FastEmbedBgeM3Provider,
 )
-from local_meeting_ai.api.app import create_app
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.entities import SegmentDraft, SummaryResult
-from local_meeting_ai.domain.enums import SourceType
+from scribe.api.app import create_app
+from scribe.config import AppSettings
+from scribe.domain.entities import SegmentDraft, SummaryResult
+from scribe.domain.enums import SourceType
 
 
 class KeywordEmbeddingProvider:

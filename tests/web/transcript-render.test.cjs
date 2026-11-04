@@ -2,7 +2,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const source = fs.readFileSync('src/local_meeting_ai/web/static/js/transcript.js', 'utf8');
+const source = fs.readFileSync('src/scribe/web/static/js/transcript.js', 'utf8');
 const render = source.slice(source.indexOf('  async function renderTranscript('), source.indexOf('  function renderMeetingResults('));
 function workspace() {
   const elements = new Map();
@@ -13,7 +13,7 @@ function workspace() {
       if (!elements.has(selector)) elements.set(selector, node());
       return elements.get(selector);
     } },
-    t: key => key, Meet2Notes: { t: key => key }, escapeHTML: text => text,
+    t: key => key, Scribe: { t: key => key }, escapeHTML: text => text,
     formatTimestamp: value => value, setTitle() {}, renderMeetingResults() {},
     applySearch() {}, applyAudioAvailability() {}, batches: [], waits: [],
     segmentContainer: {

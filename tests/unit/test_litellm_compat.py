@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from local_meeting_ai.adapters import litellm_compat
+from scribe.adapters import litellm_compat
 
 
 @pytest.fixture(autouse=True)

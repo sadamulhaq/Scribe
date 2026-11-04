@@ -11,9 +11,9 @@ from typing import Any
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.api.app import create_app
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.entities import (
+from scribe.api.app import create_app
+from scribe.config import AppSettings
+from scribe.domain.entities import (
     AudioCaptureSource,
     AudioFrameBatch,
     CapturedAudio,
@@ -25,7 +25,7 @@ from local_meeting_ai.domain.entities import (
     TranscriptionEngineRequest,
     TranscriptionResult,
 )
-from local_meeting_ai.domain.protocols import (
+from scribe.domain.protocols import (
     CancellationCheck,
     ProgressReporter,
     SegmentReporter,
@@ -497,7 +497,7 @@ def test_live_capture_pause_stop_and_transcribe(tmp_path: Path) -> None:
         assert invalid_rebuild.status_code == 422
         plugin_runs = client.get("/api/plugins/executions").json()
         assert any(
-            run["plugin_id"] == "meet2notes.analysis-cleanup"
+            run["plugin_id"] == "scribe.analysis-cleanup"
             and run["hook"] == "analysis.before"
             and run["status"] == "completed"
             for run in plugin_runs

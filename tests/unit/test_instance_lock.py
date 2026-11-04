@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from local_meeting_ai.instance_lock import (
+from scribe.instance_lock import (
     AlreadyRunningError,
     InstanceLock,
     instance_metadata,
@@ -14,7 +14,7 @@ from local_meeting_ai.instance_lock import (
 def test_instance_lock_prevents_duplicate_and_recovers_after_release(
     tmp_path: Path,
 ) -> None:
-    path = tmp_path / "meet2notes.instance.lock"
+    path = tmp_path / "scribe.instance.lock"
     metadata = instance_metadata(host="127.0.0.1", port=8765)
     first = InstanceLock(path, metadata)
     second = InstanceLock(path, metadata)

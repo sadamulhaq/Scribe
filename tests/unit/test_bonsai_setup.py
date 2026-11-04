@@ -9,22 +9,22 @@ from unittest.mock import AsyncMock, Mock
 import httpx
 import pytest
 
-from local_meeting_ai import model_setup
-from local_meeting_ai.adapters.summary.llama_cpp import LlamaCppSummaryEngine
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.errors import CapabilityUnavailableError
-from local_meeting_ai.infrastructure import bonsai_assets as assets
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.migrations import MigrationRunner
-from local_meeting_ai.infrastructure.database.repositories import SettingsRepository
-from local_meeting_ai.infrastructure.summary_hardware import (
+from scribe import model_setup
+from scribe.adapters.summary.llama_cpp import LlamaCppSummaryEngine
+from scribe.config import AppSettings
+from scribe.domain.errors import CapabilityUnavailableError
+from scribe.infrastructure import bonsai_assets as assets
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.migrations import MigrationRunner
+from scribe.infrastructure.database.repositories import SettingsRepository
+from scribe.infrastructure.summary_hardware import (
     LIGHT_PROFILE,
     Hardware,
     NvidiaGpu,
     Recommendation,
     recommend,
 )
-from local_meeting_ai.paths import AppPaths
+from scribe.paths import AppPaths
 
 
 def test_explicit_8b_install_option_and_context_metadata():

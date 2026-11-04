@@ -10,11 +10,11 @@ from typing import Any
 import numpy as np
 import pytest
 
-from local_meeting_ai.adapters.audio_capture.combined import CombinedCaptureBackend
-from local_meeting_ai.adapters.audio_capture.mixer import AudioMixer
-from local_meeting_ai.api.schemas import LiveCaptureStart
-from local_meeting_ai.domain.entities import AudioCaptureSource
-from local_meeting_ai.domain.errors import CapabilityUnavailableError, ValidationError
+from scribe.adapters.audio_capture.combined import CombinedCaptureBackend
+from scribe.adapters.audio_capture.mixer import AudioMixer
+from scribe.api.schemas import LiveCaptureStart
+from scribe.domain.entities import AudioCaptureSource
+from scribe.domain.errors import CapabilityUnavailableError, ValidationError
 
 
 def sources() -> list[AudioCaptureSource]:

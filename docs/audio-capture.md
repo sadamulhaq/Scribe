@@ -19,13 +19,13 @@ output, including notification sounds. It does not isolate Teams or Meet.
 ## Windows
 
 Choose the headphones or speakers that Teams, Meet or the browser actually uses.
-Meet2Notes exposes their WASAPI loopback inputs under **System audio**. No virtual
+Scribe exposes their WASAPI loopback inputs under **System audio**. No virtual
 mixer is required. The application must have microphone access in Windows.
 
 ## macOS
 
 Microphone recording uses CoreAudio. System audio currently requires a virtual
-input such as [BlackHole](https://github.com/ExistentialAudio/BlackHole); Meet2Notes
+input such as [BlackHole](https://github.com/ExistentialAudio/BlackHole); Scribe
 does not yet implement ScreenCaptureKit or Core Audio Taps.
 
 1. Install BlackHole separately.
@@ -35,8 +35,8 @@ does not yet implement ScreenCaptureKit or Core Audio Taps.
    for clock and drift settings.
 3. Send the call's output to that Multi-Output Device so you can hear it and
    BlackHole receives it.
-4. Select your physical microphone and **BlackHole** in Meet2Notes.
-5. Allow microphone access for Meet2Notes, or the terminal/Python host running it.
+4. Select your physical microphone and **BlackHole** in Scribe.
+5. Allow microphone access for Scribe, or the terminal/Python host running it.
 
 ## Linux
 
@@ -53,25 +53,25 @@ to the call's output. Otherwise, on systems using the ALSA PulseAudio plugin:
 2. Add a named input to `~/.asoundrc`, preserving any existing configuration:
 
    ```text
-   pcm.meet2notes_monitor {
+   pcm.scribe_monitor {
        type pulse
        device "YOUR_OUTPUT_MONITOR_NAME"
        hint {
            show on
-           description "Meet2Notes system monitor"
+           description "Scribe system monitor"
        }
    }
    ```
 
-3. Replace `YOUR_OUTPUT_MONITOR_NAME` with the actual monitor, restart Meet2Notes,
-   and refresh the device list. Select your microphone plus **Meet2Notes system
+3. Replace `YOUR_OUTPUT_MONITOR_NAME` with the actual monitor, restart Scribe,
+   and refresh the device list. Select your microphone plus **Scribe system
    monitor**. Availability depends on the distribution's ALSA PulseAudio plugin;
    this is commonly provided by `libasound2-plugins` or `alsa-plugins-pulseaudio`.
 
 See the [PulseAudio monitor documentation](https://wiki.freedesktop.org/www/Software/PulseAudio/FAQ/)
 and the [ALSA PulseAudio plugin configuration](https://github.com/alsa-project/alsa-plugins/blob/master/doc/README-pulse).
 An unavailable system input is shown with platform-specific setup guidance;
-Meet2Notes does not silently record only the microphone when both were selected.
+Scribe does not silently record only the microphone when both were selected.
 
 ## Device changes and troubleshooting
 

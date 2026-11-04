@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from local_meeting_ai.adapters.summary import llama_cpp as adapter
-from local_meeting_ai.domain.errors import CapabilityUnavailableError
+from scribe.adapters.summary import llama_cpp as adapter
+from scribe.domain.errors import CapabilityUnavailableError
 
 
 def test_8b_runtime_clamps_oversized_context_and_uses_dense_cache_budget(tmp_path, monkeypatch):
@@ -156,7 +156,7 @@ def test_hierarchical_boundary_accounts_for_the_actual_block_heading():
 
 
 def test_summary_and_assistant_share_document_prefix(tmp_path, monkeypatch):
-    from local_meeting_ai.domain.meeting_text import transcript_prefix
+    from scribe.domain.meeting_text import transcript_prefix
 
     engine = adapter.LlamaCppSummaryEngine(tmp_path)
     requests = []

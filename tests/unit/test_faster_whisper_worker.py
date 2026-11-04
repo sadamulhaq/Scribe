@@ -5,10 +5,10 @@ import threading
 from pathlib import Path
 from typing import Any
 
-from local_meeting_ai.adapters.transcription.faster_whisper import (
+from scribe.adapters.transcription.faster_whisper import (
     FasterWhisperEngine,
 )
-from local_meeting_ai.domain.entities import ModelProfile
+from scribe.domain.entities import ModelProfile
 
 
 def test_model_is_loaded_once_on_the_dedicated_worker(

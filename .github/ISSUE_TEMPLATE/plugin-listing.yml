@@ -1,5 +1,5 @@
 name: Community plugin listing
-description: Propose an independently maintained Meet2Notes plugin for the public list.
+description: Propose an independently maintained Scribe plugin for the public list.
 title: "[Plugin]: "
 labels:
   - plugin
@@ -18,7 +18,7 @@ body:
     id: repository
     attributes:
       label: Public repository URL
-      placeholder: https://github.com/author/meet2notes-example
+      placeholder: https://github.com/author/scribe-example
     validations:
       required: true
   - type: input
@@ -37,8 +37,8 @@ body:
   - type: input
     id: compatibility
     attributes:
-      label: Meet2Notes and Plugin API compatibility
-      placeholder: Meet2Notes >=0.5; Plugin API 1
+      label: Scribe and Plugin API compatibility
+      placeholder: Scribe >=0.5; Plugin API 1
     validations:
       required: true
   - type: textarea
@@ -67,7 +67,7 @@ body:
     attributes:
       label: Author confirmation
       options:
-        - label: The plugin imports its public SDK only from `local_meeting_ai.plugins`.
+        - label: The plugin imports its public SDK only from `scribe.plugins`.
           required: true
         - label: Installation, model downloads, network use, and permissions are documented in the plugin repository.
           required: true

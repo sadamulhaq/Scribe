@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.errors import ValidationError
-from local_meeting_ai.infrastructure.storage import MeetingStorage
-from local_meeting_ai.paths import AppPaths
+from scribe.config import AppSettings
+from scribe.domain.errors import ValidationError
+from scribe.infrastructure.storage import MeetingStorage
+from scribe.paths import AppPaths
 
 
 def test_storage_refuses_directory_traversal(tmp_path: Path) -> None:

@@ -3,8 +3,8 @@ from __future__ import annotations
 import json
 from types import SimpleNamespace
 
-from local_meeting_ai.domain.entities import SummaryResult
-from local_meeting_ai.domain.enums import SourceType
+from scribe.domain.entities import SummaryResult
+from scribe.domain.enums import SourceType
 
 
 def test_prompt_stream_preserves_final_metadata_and_json_endpoint(client, monkeypatch):

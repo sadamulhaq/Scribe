@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.api.app import create_app
-from local_meeting_ai.config import AppSettings
+from scribe.api.app import create_app
+from scribe.config import AppSettings
 
 
 @pytest.fixture

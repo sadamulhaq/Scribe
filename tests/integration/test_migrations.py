@@ -3,8 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 from shutil import copyfile
 
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.migrations import MigrationRunner
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.migrations import MigrationRunner
 
 
 def test_initial_migration_is_complete_and_idempotent(tmp_path: Path) -> None:
@@ -78,7 +78,7 @@ def test_library_upgrade_preserves_existing_meetings_and_search(tmp_path: Path) 
             VALUES (1, 0, 0, 1000, 'Preserved launch decision')""")
     assert runner.apply() == [13]
     assert runner.apply() == []
-    from local_meeting_ai.infrastructure.database.library import LibraryRepository
+    from scribe.infrastructure.database.library import LibraryRepository
 
     library = LibraryRepository(database)
     assert library.search(query="launch")["items"][0]["title"] == "Existing meeting"

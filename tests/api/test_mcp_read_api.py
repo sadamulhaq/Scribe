@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai.domain.entities import SegmentDraft
-from local_meeting_ai.domain.enums import SourceType
+from scribe.domain.entities import SegmentDraft
+from scribe.domain.enums import SourceType
 
 
 def _completed_meeting(client: TestClient, title: str, started_at: str) -> tuple[int, int]:
@@ -124,7 +124,7 @@ def test_mcp_configuration_and_enabled_preference(client: TestClient) -> None:
     payload = configuration.json()
     assert payload["enabled"] is True
     assert '"-m"' in payload["claude_desktop"]["content"]
-    assert "[mcp_servers.meet2notes]" in payload["codex_chatgpt"]["content"]
+    assert "[mcp_servers.scribe]" in payload["codex_chatgpt"]["content"]
     assert client.get("/api/mcp/status").json() == {"enabled": True}
 
     updated = client.put("/api/settings", json={"mcp": {"enabled": False}})

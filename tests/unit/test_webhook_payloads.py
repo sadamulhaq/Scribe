@@ -4,8 +4,8 @@ import hashlib
 import hmac
 import json
 
-from local_meeting_ai.application.webhooks import _event_envelope
-from local_meeting_ai.domain.webhooks import WebhookEvent
+from scribe.application.webhooks import _event_envelope
+from scribe.domain.webhooks import WebhookEvent
 
 
 def _event() -> WebhookEvent:
@@ -28,7 +28,7 @@ def _event() -> WebhookEvent:
 def test_metadata_payload_removes_transcript_and_summary_text() -> None:
     envelope = _event_envelope(_event(), "metadata")
 
-    assert envelope["type"] == "com.meet2notes.summary.completed.v1"
+    assert envelope["type"] == "com.scribe.summary.completed.v1"
     assert envelope["data"]["transcript"] == {"id": 9, "segment_count": 1}
     assert envelope["data"]["summary"] == {"id": 2}
     assert "Secret text" not in json.dumps(envelope)

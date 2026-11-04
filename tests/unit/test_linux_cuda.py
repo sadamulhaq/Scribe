@@ -8,9 +8,9 @@ from typing import Any
 
 import pytest
 
-from local_meeting_ai.adapters.transcription import faster_whisper as fw
-from local_meeting_ai.domain.errors import CapabilityUnavailableError
-from local_meeting_ai.infrastructure import linux_cuda as cuda
+from scribe.adapters.transcription import faster_whisper as fw
+from scribe.domain.errors import CapabilityUnavailableError
+from scribe.infrastructure import linux_cuda as cuda
 
 
 @pytest.fixture(autouse=True)

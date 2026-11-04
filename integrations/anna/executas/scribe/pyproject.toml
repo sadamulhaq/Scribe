@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tool-dev-scribe"
+version = "0.1.2"
+description = "Executa for the scribe Anna App"
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.28,<1", "pydantic>=2.12,<3", "pydantic-settings>=2.7,<3", "platformdirs>=4.3,<5"]
+
+[project.scripts]
+"tool-dev-scribe" = "scribe_plugin:main"
+
+[tool.setuptools]
+py-modules = ["scribe_plugin"]

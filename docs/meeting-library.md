@@ -1,6 +1,6 @@
 # Meeting library and quick actions
 
-Available in Meet2Notes 0.7.0. Search, tags and saved action templates are stored
+Available in Scribe 0.7.0. Search, tags and saved action templates are stored
 locally; they do not require an AI model or a cloud account.
 
 ## Find a meeting or a spoken phrase

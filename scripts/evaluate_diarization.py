@@ -24,22 +24,22 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from local_meeting_ai.adapters.diarization.diarize_cpu import DiarizeCpuEngine
-from local_meeting_ai.adapters.diarization.nemotron3 import Nemotron3DiarizationEngine
-from local_meeting_ai.adapters.diarization.pyannote_community import (
+from scribe.adapters.diarization.diarize_cpu import DiarizeCpuEngine
+from scribe.adapters.diarization.nemotron3 import Nemotron3DiarizationEngine
+from scribe.adapters.diarization.pyannote_community import (
     PyannoteCommunityDiarizationEngine,
 )
-from local_meeting_ai.adapters.diarization.sherpa_onnx import SherpaOnnxDiarizationEngine
-from local_meeting_ai.application.ai_services import DIARIZATION_DEFAULTS
-from local_meeting_ai.config import AppSettings
-from local_meeting_ai.domain.entities import DiarizationSegment
-from local_meeting_ai.domain.protocols import DiarizationEngine
-from local_meeting_ai.infrastructure.database.connection import Database
-from local_meeting_ai.infrastructure.database.repositories import SettingsRepository
-from local_meeting_ai.infrastructure.ffmpeg import FFmpegClient
-from local_meeting_ai.paths import AppPaths
+from scribe.adapters.diarization.sherpa_onnx import SherpaOnnxDiarizationEngine
+from scribe.application.ai_services import DIARIZATION_DEFAULTS
+from scribe.config import AppSettings
+from scribe.domain.entities import DiarizationSegment
+from scribe.domain.protocols import DiarizationEngine
+from scribe.infrastructure.database.connection import Database
+from scribe.infrastructure.database.repositories import SettingsRepository
+from scribe.infrastructure.ffmpeg import FFmpegClient
+from scribe.paths import AppPaths
 
-logger = logging.getLogger("meet2notes.diarization_evaluator")
+logger = logging.getLogger("scribe.diarization_evaluator")
 
 PROVIDERS = ("cpu", "cuda")
 ENGINE_CHOICES = (
@@ -393,7 +393,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=[Path("debate_ceuta.wav")],
         help="WAV or MP3 file(s) to benchmark (default: debate_ceuta.wav).",
     )
-    parser.add_argument("--data-dir", type=Path, help="Meet2Notes data directory override.")
+    parser.add_argument("--data-dir", type=Path, help="Scribe data directory override.")
     parser.add_argument("--models-dir", type=Path, help="AI models directory override.")
     parser.add_argument(
         "--results-dir",
@@ -566,7 +566,7 @@ def _export_timeline_files(run: dict[str, Any], results_dir: Path) -> list[Path]
         ) + ".txt"
         destination = results_dir / "timelines" / filename
         lines = [
-            "Meet2Notes diarization evaluation timeline",
+            "Scribe diarization evaluation timeline",
             f"Run: {run_id}",
             f"Source: {evaluation.get('source_path')}",
             f"Engine: {evaluation.get('engine')}",

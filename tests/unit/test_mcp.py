@@ -5,10 +5,10 @@ import json
 import httpx
 import pytest
 
-from local_meeting_ai.mcp.configuration import desktop_client_configurations
-from local_meeting_ai.mcp.discovery import DiscoveryError, candidate_base_urls
-from local_meeting_ai.mcp.gateway import GatewayError, Meet2NotesGateway
-from local_meeting_ai.mcp.server import mcp
+from scribe.mcp.configuration import desktop_client_configurations
+from scribe.mcp.discovery import DiscoveryError, candidate_base_urls
+from scribe.mcp.gateway import GatewayError, ScribeGateway
+from scribe.mcp.server import mcp
 
 
 @pytest.mark.asyncio
@@ -16,14 +16,14 @@ async def test_gateway_starts_disconnected_without_requiring_app() -> None:
     def unavailable(request: httpx.Request) -> httpx.Response:
         raise httpx.ConnectError("offline", request=request)
 
-    gateway = Meet2NotesGateway(
+    gateway = ScribeGateway(
         base_urls=["http://127.0.0.1:8765"],
         transport=httpx.MockTransport(unavailable),
     )
     status = await gateway.status()
     assert status.connected is False
-    assert status.error_code == "meet2notes_not_running"
-    assert "Open Meet2Notes" in str(status.message)
+    assert status.error_code == "scribe_not_running"
+    assert "Open Scribe" in str(status.message)
 
 
 @pytest.mark.asyncio
@@ -63,7 +63,7 @@ async def test_gateway_rag_search_never_requests_index_rebuild() -> None:
             )
         raise AssertionError(request.url.path)
 
-    gateway = Meet2NotesGateway(
+    gateway = ScribeGateway(
         base_urls=["http://127.0.0.1:8765"],
         transport=httpx.MockTransport(handler),
     )
@@ -119,7 +119,7 @@ async def test_gateway_pages_summary_content_and_fetches_metadata_first() -> Non
             )
         raise AssertionError(request.url.path)
 
-    gateway = Meet2NotesGateway(
+    gateway = ScribeGateway(
         base_urls=["http://127.0.0.1:8765"],
         transport=httpx.MockTransport(handler),
     )
@@ -146,12 +146,12 @@ def test_desktop_client_configurations_use_stdio_and_platform_paths(tmp_path) ->
     claude = configurations["claude-desktop"]
     codex = configurations["codex-chatgpt"]
     assert claude.path == tmp_path / "appdata" / "Claude" / "claude_desktop_config.json"
-    assert json.loads(claude.content)["mcpServers"]["meet2notes"]["args"] == [
+    assert json.loads(claude.content)["mcpServers"]["scribe"]["args"] == [
         "-m",
-        "local_meeting_ai.mcp.server",
+        "scribe.mcp.server",
     ]
     assert codex.path == tmp_path / "home" / ".codex" / "config.toml"
-    assert "[mcp_servers.meet2notes]" in codex.content
+    assert "[mcp_servers.scribe]" in codex.content
 
 
 @pytest.mark.asyncio
@@ -160,7 +160,7 @@ async def test_gateway_rejects_reads_when_mcp_is_disabled() -> None:
         assert request.url.path == "/api/mcp/status"
         return httpx.Response(200, json={"enabled": False})
 
-    gateway = Meet2NotesGateway(
+    gateway = ScribeGateway(
         base_urls=["http://127.0.0.1:8765"],
         transport=httpx.MockTransport(handler),
     )
@@ -182,7 +182,7 @@ def test_discovery_rejects_remote_backend_without_explicit_opt_in(
 async def test_server_exposes_only_the_small_read_surface() -> None:
     tools = await mcp.list_tools()
     assert {tool.name for tool in tools} == {
-        "meet2notes_status",
+        "scribe_status",
         "list_meetings",
         "get_meeting",
         "get_transcript",

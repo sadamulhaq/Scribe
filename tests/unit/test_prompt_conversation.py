@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from local_meeting_ai.adapters.summary.llama_cpp import LlamaCppSummaryEngine
-from local_meeting_ai.application.rag import PromptService
+from scribe.adapters.summary.llama_cpp import LlamaCppSummaryEngine
+from scribe.application.rag import PromptService
 
 
 @pytest.mark.parametrize("native_bonsai", [False, True])
@@ -21,7 +21,7 @@ def test_followup_reaches_local_model_as_latest_user_turn(tmp_path, monkeypatch,
     monkeypatch.setattr(engine, "_resolve_model_path", lambda *_args: tmp_path)
     monkeypatch.setattr(engine, "_get_model", lambda *_args: Model())
     if native_bonsai:
-        monkeypatch.setattr("local_meeting_ai.adapters.summary.llama_cpp.BonsaiModel", Model)
+        monkeypatch.setattr("scribe.adapters.summary.llama_cpp.BonsaiModel", Model)
     config = {
         "prompt_mode": True, "prompt_question": "What about the PDF?",
         "prompt_history": "USER: Who spoke?\nASSISTANT: Alex and Morgan",

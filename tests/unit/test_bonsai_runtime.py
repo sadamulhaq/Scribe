@@ -6,8 +6,8 @@ from unittest.mock import Mock
 import httpx
 import pytest
 
-from local_meeting_ai.domain.errors import CapabilityUnavailableError
-from local_meeting_ai.infrastructure import bonsai_runtime as runtime
+from scribe.domain.errors import CapabilityUnavailableError
+from scribe.infrastructure import bonsai_runtime as runtime
 
 
 @pytest.fixture

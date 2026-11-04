@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
-from local_meeting_ai import __version__
+from scribe import __version__
 
 
 def test_health_and_capabilities_are_explicit(client: TestClient) -> None:
@@ -184,7 +184,7 @@ def test_diagnostic_report_continues_and_is_shareable(client: TestClient) -> Non
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["filename"].startswith("meet2notes-diagnostics-")
+    assert payload["filename"].startswith("scribe-diagnostics-")
     assert "== Hardware ==" in payload["report"]
     assert "== Non-blocking component checks ==" in payload["report"]
     assert "== Recent application log" in payload["report"]
